@@ -6,7 +6,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff050505),
+      backgroundColor: Color(0xff000000),
       body: Center(
         child: Column(
           children: [
@@ -58,7 +58,9 @@ class WelcomePage extends StatelessWidget {
                       ),
                       SizedBox(height: 32),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/main");
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xffC67C4E),
                           shape: RoundedRectangleBorder(
