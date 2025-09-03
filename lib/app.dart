@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: true,
         textTheme: GoogleFonts.soraTextTheme(),
         primaryColor: Color(0xffC67C4E),
         colorScheme: ColorScheme.light(primary: Color(0xffC67C4E)),
