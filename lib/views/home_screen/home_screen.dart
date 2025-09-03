@@ -1,8 +1,23 @@
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:coffee_shop/constants/colors.dart';
+import 'package:coffee_shop/views/home_screen/widgets/all_coffee.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 6, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,11 +137,67 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
+
             SizedBox(height: 95),
-            Expanded(child: Container(color: Colors.purpleAccent)),
+            Expanded(
+              child: Container(
+                color: AppColors.whiteHover,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 24),
+                  child: Column(
+                    children: [
+                      ButtonsTabBar(
+                        backgroundColor: AppColors.primary,
+                        unselectedBackgroundColor: AppColors.unSelectTab,
+
+                        controller: _tabController,
+                        onTap: (index) {
+                          _tabController.animateTo(index);
+                        },
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
+                        buttonMargin: EdgeInsets.only(right: 32),
+
+                        tabs: [
+                          Tab(text: 'All Coffee'),
+                          Tab(text: 'Machiato'),
+                          Tab(text: 'Latte'),
+                          Tab(text: "Americano"),
+                          Tab(text: 'Americano'),
+                          Tab(text: 'Americano'),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Expanded(
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            AllCoffee(),
+                            Center(child: Text('Content 2')),
+                            Center(child: Text('Content 3')),
+                            Center(child: Text('Content 3')),
+                            Center(child: Text('Content 3')),
+                            Center(child: Text('Content 4')),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget buildTab(String text) {
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 8), // gap between tabs
+    child: Tab(text: text),
+  );
 }
